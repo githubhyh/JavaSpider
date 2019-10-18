@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hyh.resource.SpiderInit;
 import com.hyh.spider.parse.ParseImpl;
 import com.hyh.sync.SyncFile;
-import com.hyh.util.file.FileUtil;
 
 public class ParseSourceTask implements Runnable {
 	/**

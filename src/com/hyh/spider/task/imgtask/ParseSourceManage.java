@@ -3,6 +3,7 @@ package com.hyh.spider.task.imgtask;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import com.hyh.resource.SpiderInit;
 import com.hyh.resource.URLSource;
 
 public class ParseSourceManage implements Runnable {
@@ -26,7 +27,7 @@ public class ParseSourceManage implements Runnable {
 			});
 			System.out.println(pool);
 			try {
-				Thread.sleep(35000);
+				Thread.sleep(Integer.parseInt(SpiderInit.getGetImgSourceTime()));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("资源解析中断，线程已经退出......");

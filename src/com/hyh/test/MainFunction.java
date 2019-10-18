@@ -15,7 +15,6 @@ public class MainFunction {
 		int dialog = JOptionPane.showConfirmDialog(null, "停止爬虫...", "爬虫正在运行...", JOptionPane.YES_NO_OPTION);
 		if (dialog == JOptionPane.YES_OPTION) {
 			manageCenter.shutdownNow();
-			System.out.println("系统退出...");
 		}
 	}
 }

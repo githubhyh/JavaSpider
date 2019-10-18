@@ -21,6 +21,10 @@ public class SpiderInit {
 	private static String htmlAttributeName;
 	private static String htmlPathRegex;
 	private static String sourcePathRegex;
+	private static String getHtmlSourceTime;
+	private static String getImgSourceTime;
+	private static String downloadSavePath;
+	private static String downloadTaskNum;
 	
 	static {
 		try {
@@ -39,6 +43,10 @@ public class SpiderInit {
 			htmlAttributeName = properties.getProperty("htmlAttributeName");
 			htmlPathRegex = properties.getProperty("htmlPathRegex");
 			sourcePathRegex = properties.getProperty("sourcePathRegex");
+			getHtmlSourceTime = properties.getProperty("getHtmlSourceTime");
+			getImgSourceTime = properties.getProperty("getImgSourceTime");
+			downloadSavePath = properties.getProperty("downloadSavePath");
+			downloadTaskNum = properties.getProperty("downloadTaskNum");
 		}catch (IOException e) {
 			// TODO: handle exception
 			System.out.println("资源文件加载错误！！！请确认后，重新启动");
@@ -92,5 +100,21 @@ public class SpiderInit {
 
 	public static String getHtmlTargetCss() {
 		return htmlTargetCss;
+	}
+
+	public static String getGetHtmlSourceTime() {
+		return getHtmlSourceTime;
+	}
+
+	public static String getGetImgSourceTime() {
+		return getImgSourceTime;
+	}
+
+	public static String getDownloadSavePath() {
+		return downloadSavePath;
+	}
+
+	public static String getDownloadTaskNum() {
+		return downloadTaskNum;
 	}
 }

@@ -43,6 +43,7 @@ public class SyncFile {
 	public synchronized void writeSourceToFile(String data, String destPath) {
 		try {
 			bos.write(data.getBytes());
+			bos.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("资源文件写入错误......");
@@ -53,6 +54,7 @@ public class SyncFile {
 	public void close() {
 		try {
 			if (bos != null) {
+				bos.flush();
 				bos.close();
 			}
 			if (fos != null) {

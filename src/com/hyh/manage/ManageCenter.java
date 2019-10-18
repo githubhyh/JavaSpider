@@ -19,13 +19,14 @@ public class ManageCenter {
 	
 	private List<Runnable> manageList = new ArrayList<Runnable>();
 	
-	//任务管理器注入
+	//任务管理器注入（根据对象注入）
 	public void submitTask(Runnable...tasks) {
 		for (Runnable task:tasks) {
 			manageList.add(task);
 		}
 	}
 	
+	//任务管理器注入（根据类型注入）
 	public void submitTask(Class<?>...tasksClass) {
 		for (Class<?> temp:tasksClass) {
 			manageList.add(getTask(temp));
@@ -42,7 +43,33 @@ public class ManageCenter {
 	//关闭任务管理器，且将内存中的资源写入文件，下次接着爬取
 	/***/
 	public void shutdownNow() {
+		//关闭线程池
+		pool.shutdownNow();
+		managePool.shutdownNow();
+		
+		//阻塞判断线程池完全关闭
+		while (true) {
+			if (pool.isTerminated()&&managePool.isTerminated()) {
+				break;
+			}
+		}
+		
+		//线程完全关闭后，将内存资源写入文件
+		String currentPath = source.getCurrentPath();
+		List<String> htmlPaths = source.getHtmlPaths();
+		List<String> imgPaths = source.getImgPaths();
+		if (htmlPaths==null||htmlPaths.isEmpty()) {
+			FileUtil.saveSource(currentPath, SpiderInit.getHtmlCachePath(), false);
+		}else {
+			FileUtil.saveSource(htmlPaths, SpiderInit.getHtmlCachePath(), false);
+		}
+		FileUtil.saveSource(imgPaths, SpiderInit.getImgCachePath(), false);
+		
+		//关闭并发文件流
 		SyncFile.getInstance().close();
+		
+		//系统退出完毕
+		System.out.println("爬取结束，系统退出......");
 	}
 	
 	public void init() {

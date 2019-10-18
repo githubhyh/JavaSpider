@@ -3,6 +3,7 @@ package com.hyh.spider.task.htmltask;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import com.hyh.resource.SpiderInit;
 import com.hyh.resource.URLSource;
 
 public class ParseHtmlManage implements Runnable {
@@ -25,7 +26,7 @@ public class ParseHtmlManage implements Runnable {
 			});
 			System.out.println(pool);
 			try {
-				Thread.sleep(180000);
+				Thread.sleep(Integer.parseInt(SpiderInit.getGetHtmlSourceTime()));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println("网页解析线程中断，线程退出......");

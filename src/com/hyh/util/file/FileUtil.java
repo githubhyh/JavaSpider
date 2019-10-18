@@ -43,19 +43,25 @@ public class FileUtil {
 		}
 	}
 	
-	public static List<String> readSource(String sourcePath) {
-		List<String> paths = new ArrayList<String>();
+	public static List<String> readSource(String sourcePath) {		
 		File file = new File(sourcePath);
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String data = "default";
-			while ((data = reader.readLine()) != null) {
-				paths.add(data);
+		return readSource(file);
+	}
+	
+	public static List<String> readSource(File file) {
+		List<String> paths = new ArrayList<String>();
+		if (file!=null&&file.exists()) {
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String data = "default";
+				while ((data = reader.readLine()) != null) {
+					paths.add(data);
+				}
+				reader.close();
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			reader.close();
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 		}
 		return paths;
 	}
@@ -93,6 +99,8 @@ public class FileUtil {
 	}
 	
 	public static void saveSource(List<String> sources, String destPath, boolean append) {
-		writeToFile(sources, destPath, append);
+		if (sources!=null&&!sources.isEmpty()) {
+			writeToFile(sources, destPath, append);
+		}
 	}
 }
